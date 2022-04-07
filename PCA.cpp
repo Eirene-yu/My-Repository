@@ -74,12 +74,12 @@ tuple<Matrix, Matrix, Matrix> PCA::NIPALS(size_t A, double epsilon){
       t.Element_ij(i,0) = MATRIX.Element_ij(i,j);
     }
     do {
-      p = Transposition(Transposition(t) * EE);
+      p = Transposition(t) * EE;
       double t1_t = (Transposition(t) * t).Element_ij(0,0);
       for (auto& element : p.GetMatrix()){
         for (auto& el: element) el /= t1_t;
       }
-      
+      p = Transposition(p);
       double norm_p = Euclidean_norm(p);
       
       for (auto& element : p.GetMatrix()){
